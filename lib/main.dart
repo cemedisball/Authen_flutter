@@ -13,6 +13,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
+         scaffoldBackgroundColor: const Color.fromARGB(255, 169, 220, 243),
+      
         inputDecorationTheme: InputDecorationTheme(
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.0),
@@ -28,10 +30,11 @@ class MyApp extends StatelessWidget {
             minimumSize: Size(double.infinity, 50),
           ),
         ),
-        textButtonTheme: TextButtonThemeData(
+        textButtonTheme: TextButtonThemeData( 
           style: TextButton.styleFrom(
           
           ),
+          
         ),
       ),
       home: LoginPage(),

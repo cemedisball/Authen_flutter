@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_lab1/controller/auth_service.dart';
 
 class LoginForm extends StatefulWidget {
   @override
@@ -7,14 +8,28 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
-  String _userName = '';
-  String _password = '';
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
-  void _login() {
+  void _login() async {
     if (_formKey.currentState?.validate() ?? false) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Logging in with $_userName')),
-      );
+      print('Username: ${_usernameController.text}');
+      print('Password: ${_passwordController.text}');
+
+      try {
+        // Perform login
+        await AuthService().login(_usernameController.text, _passwordController.text);
+        
+        // Provide feedback or navigate after successful login
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Login successful')),
+        );
+      } catch (e) {
+        // Handle login errors
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Login failed: $e')),
+        );
+      }
     }
   }
 
@@ -25,6 +40,7 @@ class _LoginFormState extends State<LoginForm> {
       child: Column(
         children: <Widget>[
           TextFormField(
+            controller: _usernameController,
             decoration: InputDecoration(
               labelText: 'Username',
               prefixIcon: Icon(Icons.person),
@@ -35,14 +51,10 @@ class _LoginFormState extends State<LoginForm> {
               }
               return null;
             },
-            onChanged: (value) {
-              setState(() {
-                _userName = value;
-              });
-            },
           ),
           SizedBox(height: 16.0),
           TextFormField(
+            controller: _passwordController,
             decoration: InputDecoration(
               labelText: 'Password',
               prefixIcon: Icon(Icons.lock),
@@ -53,11 +65,6 @@ class _LoginFormState extends State<LoginForm> {
                 return 'Please enter your password';
               }
               return null;
-            },
-            onChanged: (value) {
-              setState(() {
-                _password = value;
-              });
             },
           ),
           SizedBox(height: 24.0),

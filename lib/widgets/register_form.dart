@@ -19,7 +19,6 @@ class _RegisterFormState extends State<RegisterForm> {
       );
     }
   }
-
   @override
   Widget build(BuildContext context) {
     return Form(
