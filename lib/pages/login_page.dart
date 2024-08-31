@@ -3,13 +3,15 @@ import 'package:flutter_lab1/widgets/login_form.dart';
 import 'register_page.dart';  // ตรวจสอบให้แน่ใจว่ามีการ import register_page.dart
 
 class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             child: SizedBox(
               width: 350, // ความกว้างของกรอบ
               child: Card(
@@ -18,11 +20,11 @@ class LoginPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16.0),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.all(24.0),
+                  padding: const EdgeInsets.all(24.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      Text(
+                      const Text(
                         'Login',
                         style: TextStyle(
                           fontSize: 24.0,
@@ -30,7 +32,7 @@ class LoginPage extends StatelessWidget {
                           color: Colors.blueAccent,
                         ),
                       ),
-                      SizedBox(height: 16.0),
+                      const SizedBox(height: 16.0),
                       Text(
                         'Please log in to continue',
                         style: TextStyle(
@@ -38,18 +40,18 @@ class LoginPage extends StatelessWidget {
                           color: Colors.grey[600],
                         ),
                       ),
-                      SizedBox(height: 24.0),
-                      LoginForm(),
-                      SizedBox(height: 16.0),
+                      const SizedBox(height: 24.0),
+                      const LoginForm(),
+                      const SizedBox(height: 16.0),
                       TextButton(
                         onPressed: () {
                           // ใช้ RegisterPage แทน register_page
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => RegisterPage()),
+                            MaterialPageRoute(builder: (context) => const RegisterPage()),
                           );
                         },
-                        child: Text('Create an account'),
+                        child: const Text('Create an account'),
                       ),
                     ],
                   ),

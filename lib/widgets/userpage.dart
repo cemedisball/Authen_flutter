@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 
-class WelcomePage extends StatelessWidget {
+class user_WelcomePage extends StatelessWidget {
+  const user_WelcomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Welcome'),
+        title: const Text('User'),
       ),
-      body: Center(
+      body: const Center(
         child: Text(
-          'Welcome to the app!',
+          'USER',
           style: TextStyle(fontSize: 24.0),
         ),
       ),

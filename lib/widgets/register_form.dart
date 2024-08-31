@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_lab1/controller/auth_service.dart';
 
 class RegisterForm extends StatefulWidget {
+  const RegisterForm({super.key});
+
   @override
   _RegisterFormState createState() => _RegisterFormState();
 }
@@ -14,26 +16,28 @@ class _RegisterFormState extends State<RegisterForm> {
   final TextEditingController _roleController = TextEditingController();
   String _selectedRole = ''; // Initialize with a default value
 
-
   void _register() async {
     if (_formKey.currentState?.validate() ?? false) {
       print('Name : ${_NameController.text}');
       print('Username : ${_usernameController.text}');
-      print('Passwrod : ${_passwordController.text}');
-      print('Role: $_selectedRole');
-      try{
-     await AuthService().register(_NameController.text,_usernameController.text, _passwordController.text,_roleController.text);
+      print('Password : ${_passwordController.text}');
+      print('role: $_selectedRole'); // Use _selectedRole here
+      try {
+        await AuthService().register(
+            _NameController.text,
+            _usernameController.text,
+            _passwordController.text,
+            _selectedRole); // Use _selectedRole here
 
-     ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Registeration successful'))
-     );
-      }catch (e){
-       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Registeration failed'))
-       );
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Registration successful')));
+      } catch (e) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text('Registration failed')));
       }
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -42,7 +46,7 @@ class _RegisterFormState extends State<RegisterForm> {
         children: <Widget>[
           TextFormField(
             controller: _NameController,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               labelText: 'Name',
               prefixIcon: Icon(Icons.person),
             ),
@@ -53,15 +57,15 @@ class _RegisterFormState extends State<RegisterForm> {
               return null;
             },
             //onChanged: (value) {
-              //setState(() {
-                //Name = value;
-              //});
+            //setState(() {
+            //Name = value;
+            //});
             //},
           ),
-          SizedBox(height: 16.0),
+          const SizedBox(height: 16.0),
           TextFormField(
             controller: _usernameController,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               labelText: 'Username',
               prefixIcon: Icon(Icons.person),
             ),
@@ -72,15 +76,15 @@ class _RegisterFormState extends State<RegisterForm> {
               return null;
             },
             //onChanged: (value) {
-              //setState(() {
-                //_userName = value;
-              //});
+            //setState(() {
+            //_userName = value;
+            //});
             //},
           ),
-          SizedBox(height: 16.0),
+          const SizedBox(height: 16.0),
           TextFormField(
             controller: _passwordController,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               labelText: 'Password',
               prefixIcon: Icon(Icons.lock),
             ),
@@ -97,42 +101,46 @@ class _RegisterFormState extends State<RegisterForm> {
             //   });
             // },
           ),
-          SizedBox(height: 16.0),
+          const SizedBox(height: 16.0),
           //Text('Role:', style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
-          SizedBox(height: 8.0),
+          const SizedBox(height: 8.0),
           Wrap(
             spacing: 8.0,
             children: <Widget>[
               ChoiceChip(
-                label: Text('User'),
-                selected: _selectedRole == 'User',
+                label: const Text('user'),
+                selected: _selectedRole == 'user',
                 selectedColor: Colors.blueAccent,
                 backgroundColor: Colors.grey[200],
-                labelStyle: TextStyle(color: _selectedRole == 'User' ? Colors.white : Colors.black),
+                labelStyle: TextStyle(
+                    color:
+                        _selectedRole == 'user' ? Colors.white : Colors.black),
                 onSelected: (selected) {
                   setState(() {
-                    _selectedRole = 'User';
+                    _selectedRole = 'user';
                   });
                 },
               ),
               ChoiceChip(
-                label: Text('Admin'),
-                selected: _selectedRole == 'Admin',
+                label: const Text('admin'),
+                selected: _selectedRole == 'admin',
                 selectedColor: Colors.blueAccent,
                 backgroundColor: Colors.grey[200],
-                labelStyle: TextStyle(color: _selectedRole == 'Admin' ? Colors.white : Colors.black),
+                labelStyle: TextStyle(
+                    color:
+                        _selectedRole == 'admin' ? Colors.white : Colors.black),
                 onSelected: (selected) {
                   setState(() {
-                    _selectedRole = 'Admin';
+                    _selectedRole = 'admin';
                   });
                 },
               ),
             ],
           ),
-          SizedBox(height: 24.0),
+          const SizedBox(height: 24.0),
           ElevatedButton(
             onPressed: _register,
-            child: Text('Register'),
+            child: const Text('Register'),
           ),
         ],
       ),
