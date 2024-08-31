@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_lab1/controller/auth_service.dart';
+import 'package:flutter_lab1/widgets/homepage.dart';
 
 class LoginForm extends StatefulWidget {
   @override
@@ -11,27 +12,17 @@ class _LoginFormState extends State<LoginForm> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  void _login() async {
-    if (_formKey.currentState?.validate() ?? false) {
-      print('Username: ${_usernameController.text}');
-      print('Password: ${_passwordController.text}');
-
-      try {
-        // Perform login
-        await AuthService().login(_usernameController.text, _passwordController.text);
-        
-        // Provide feedback or navigate after successful login
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Login successful')),
-        );
-      } catch (e) {
-        // Handle login errors
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Login failed: $e')),
-        );
-      }
-    }
+  void _login() async{
+  if(_formKey.currentState!.validate()){
+    print('Username:${_usernameController.text}');
+    print('Password:${_passwordController.text}');
+    //if (use.role == 'admin') {
+      //Navigator.pushReplacementNamed(context, '/home');
+    }else{
   }
+  
+    
+}
 
   @override
   Widget build(BuildContext context) {

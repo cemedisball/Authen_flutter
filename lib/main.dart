@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'pages/login_page.dart';
+import 'package:flutter_lab1/widgets/homepage.dart';
 
 void main() {
   runApp(MyApp());
@@ -38,6 +39,9 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: LoginPage(),
+      routes: {
+        '/home' : (context) => WelcomePage(),
+      },
     );
   }
 }

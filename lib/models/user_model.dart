@@ -26,14 +26,14 @@ class UserModel {
 
 class User {
     String id;
-    String userName;
+    String username;
     String name;
     String role;
     
 
     User({
         required this.id,
-        required this.userName,
+        required this.username,
         required this.name,
         required this.role,
         
@@ -41,7 +41,7 @@ class User {
 
     factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["_id"],
-        userName: json["user_name"],
+        username: json["username"],
         name: json["name"],
         role: json["role"],
        
@@ -49,7 +49,7 @@ class User {
 
     Map<String, dynamic> toJson() => {
         "_id": id,
-        "user_name": userName,
+        "username": username,
         "name": name,
         "role": role,
         

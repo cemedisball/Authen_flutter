@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_lab1/controller/auth_service.dart';
 
 class RegisterForm extends StatefulWidget {
   @override
@@ -7,16 +8,30 @@ class RegisterForm extends StatefulWidget {
 
 class _RegisterFormState extends State<RegisterForm> {
   final _formKey = GlobalKey<FormState>();
-  String _userName = '';
-  String _password = '';
-  String _name = '';
-  String _selectedRole = 'User'; // ค่าเริ่มต้น
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _NameController = TextEditingController();
+  final TextEditingController _roleController = TextEditingController();
+  String _selectedRole = ''; // Initialize with a default value
 
-  void _register() {
+
+  void _register() async {
     if (_formKey.currentState?.validate() ?? false) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Registering with $_userName and role $_selectedRole')),
-      );
+      print('Name : ${_NameController.text}');
+      print('Username : ${_usernameController.text}');
+      print('Passwrod : ${_passwordController.text}');
+      print('Role: $_selectedRole');
+      try{
+     await AuthService().register(_NameController.text,_usernameController.text, _passwordController.text,_roleController.text);
+
+     ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Registeration successful'))
+     );
+      }catch (e){
+       ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Registeration failed'))
+       );
+      }
     }
   }
   @override
@@ -26,6 +41,7 @@ class _RegisterFormState extends State<RegisterForm> {
       child: Column(
         children: <Widget>[
           TextFormField(
+            controller: _NameController,
             decoration: InputDecoration(
               labelText: 'Name',
               prefixIcon: Icon(Icons.person),
@@ -36,14 +52,15 @@ class _RegisterFormState extends State<RegisterForm> {
               }
               return null;
             },
-            onChanged: (value) {
-              setState(() {
-                _name = value;
-              });
-            },
+            //onChanged: (value) {
+              //setState(() {
+                //Name = value;
+              //});
+            //},
           ),
           SizedBox(height: 16.0),
           TextFormField(
+            controller: _usernameController,
             decoration: InputDecoration(
               labelText: 'Username',
               prefixIcon: Icon(Icons.person),
@@ -54,14 +71,15 @@ class _RegisterFormState extends State<RegisterForm> {
               }
               return null;
             },
-            onChanged: (value) {
-              setState(() {
-                _userName = value;
-              });
-            },
+            //onChanged: (value) {
+              //setState(() {
+                //_userName = value;
+              //});
+            //},
           ),
           SizedBox(height: 16.0),
           TextFormField(
+            controller: _passwordController,
             decoration: InputDecoration(
               labelText: 'Password',
               prefixIcon: Icon(Icons.lock),
@@ -73,11 +91,11 @@ class _RegisterFormState extends State<RegisterForm> {
               }
               return null;
             },
-            onChanged: (value) {
-              setState(() {
-                _password = value;
-              });
-            },
+            // onChanged: (value) {
+            //   setState(() {
+            //     _password = value;
+            //   });
+            // },
           ),
           SizedBox(height: 16.0),
           //Text('Role:', style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
