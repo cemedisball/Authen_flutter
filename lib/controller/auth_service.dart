@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class AuthService {
-  Future<UserModel?> login(String username, String password) async {
+  Future<UserModel> login(String username, String password) async {
     print(apiURL);
 
     final response = await http.post(Uri.parse("$apiURL/api/auth/login"),
@@ -14,8 +14,11 @@ class AuthService {
           "password": password,
         }));
     print(response.statusCode);
-    print(response.body);
-    return null;
+    if (response.statusCode == 200) {
+      return UserModel.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('Failed to login');
+    }
   }
 
   Future<void> register(
@@ -29,7 +32,7 @@ class AuthService {
           "role": role,
         }));
     print(response.statusCode);
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
       print("Rsgistration Successful");
     } else {
       print("Rsgistration Failed");

@@ -11,7 +11,7 @@ class WelcomePage extends StatelessWidget {
       ),
       body: const Center(
         child: Text(
-          'Welcome to the app!',
+          'ADMIN',
           style: TextStyle(fontSize: 24.0),
         ),
       ),

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_lab1/controller/auth_service.dart';
 import 'package:flutter_lab1/models/user_model.dart';
-import 'package:flutter_lab1/widgets/adminpage.dart';
-import 'package:flutter_lab1/widgets/userpage.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -15,29 +13,40 @@ class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _roleController = TextEditingController();
 
   void _login() async {
     if (_formKey.currentState!.validate()) {
       // Simulate a login check
       final username = _usernameController.text;
       final password = _passwordController.text;
-      final role = _roleController.text;
 
-      final user = AuthService()
-          .login(_usernameController.text, _passwordController.text);
-      // For this example, let's assume 'admin' is the correct username and password
-      if (role == 'admin') {
-        // Navigate to the home page
-        Navigator.pushReplacementNamed(context, '/home');
-      } else {
-        Navigator.pushReplacementNamed(context, '/homeuser');
+      try {
+        final UserModel? userModel =
+            await AuthService().login(username, password);
+
+        if (userModel != null) {
+          final String role = userModel.user.role;
+
+          if (role == 'admin') {
+            Navigator.pushReplacementNamed(context, '/homeadmin');
+          } else if (role == 'user') {
+            Navigator.pushReplacementNamed(context, '/homeuser');
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Unknown role: $role')),
+            );
+          }
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Login failed: User model is null')),
+          );
+        }
+      } catch (e) {
+        print(e);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to Login: $e')),
+        );
       }
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Invalid username or password'),
-        ),
-      );
     }
   }
 
