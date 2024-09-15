@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_lab1/widgets/userpage.dart';
 import 'pages/login_page.dart';
 import 'package:flutter_lab1/widgets/adminpage.dart';
+import 'package:flutter_lab1/widgets/addpage.dart';
+import 'package:flutter_lab1/widgets/editpage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -40,7 +42,9 @@ class MyApp extends StatelessWidget {
       home: const LoginPage(),
       routes: {
         '/homeadmin': (context) => WelcomePage(),
-        '/homeuser': (context) => user_WelcomePage(),
+        '/homeuser': (context) => UserWelcomePage(),
+        '/addproduct': (context) => AddPage(),
+        '/editproduct': (context) => EditPage(),
       },
     );
   }
