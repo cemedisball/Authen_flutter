@@ -1,13 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_lab1/widgets/login_form.dart'; // ตรวจสอบเส้นทาง
+import 'package:shared_preferences/shared_preferences.dart';
 
-class UserWelcomePage extends StatelessWidget {
+class UserWelcomePage extends StatefulWidget {
   const UserWelcomePage({super.key});
+  @override
+  _UserWelcomePage createState() => _UserWelcomePage();
+}
+
+class _UserWelcomePage extends State<UserWelcomePage> {
+  String? myname;
+  void loadData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      myname = prefs.getString("myname");
+    });
+  }
+
+  void remove() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove('myname');
+    Navigator.pushReplacementNamed(context, '/login');
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('User'),
+        title: Text(
+          myname ?? "รอสักครู่...",
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: remove,
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(15.0),

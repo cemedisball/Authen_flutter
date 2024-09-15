@@ -1,16 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class EditPage extends StatelessWidget {
+class EditPage extends StatefulWidget {
+  const EditPage({super.key});
+
+  @override
+  _Editpage createState() => _Editpage();
+}
+
+class _Editpage extends State<EditPage> {
+  String? myname;
+
+  void loadData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      myname = prefs.getString("myname");
+    });
+  }
+
+  @override
+  void initState() {
+    loadData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Page'),
+        title: Text(myname ?? "รอสักครู่"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Column(
           children: [
+            Text(
+              "Edit Product",
+              style: TextStyle(
+                fontSize: 28.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             TextField(
               decoration: InputDecoration(
                 labelText: 'ชื่อ',

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_lab1/widgets/login_form.dart';
 import 'package:flutter_lab1/widgets/userpage.dart';
 import 'pages/login_page.dart';
 import 'package:flutter_lab1/widgets/adminpage.dart';
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
         '/homeuser': (context) => UserWelcomePage(),
         '/addproduct': (context) => AddPage(),
         '/editproduct': (context) => EditPage(),
+        '/login': (context) => LoginPage(),
       },
     );
   }

@@ -1,28 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_lab1/controller/auth_service.dart';
 import 'package:flutter_lab1/models/user_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
-
   @override
   _LoginFormState createState() => _LoginFormState();
 }
 
 class _LoginFormState extends State<LoginForm> {
-  final _formKey = GlobalKey<FormState>();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  final _formKey = GlobalKey<FormState>();
 
   void _login() async {
     if (_formKey.currentState!.validate()) {
       // Simulate a login check
-      final username = _usernameController.text;
+      final userName = _usernameController.text;
       final password = _passwordController.text;
 
       try {
         final UserModel? userModel =
-            await AuthService().login(username, password);
+            await AuthService().login(userName, password);
+        final SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString('Token', userModel!.token.accessToken);
+        await prefs.setString('R_Token', userModel!.token.refreshToken);
+        await prefs.setString('myname', userModel!.user.userName);
 
         if (userModel != null) {
           final String role = userModel.user.role;
