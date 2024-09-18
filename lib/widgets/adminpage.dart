@@ -12,25 +12,25 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
-  String? myname;
+  // String? myname;
 
-  void loadData() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      myname = prefs.getString("myname");
-    });
-  }
+  // void loadData() async {
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   setState(() {
+  //     myname = prefs.getString("myname");
+  //   });
+  // }
 
-  void remove() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.remove('myname');
-    Navigator.pushReplacementNamed(context, '/login');
-  }
+  // void remove() async {
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   await prefs.remove('myname');
+  //   Navigator.pushReplacementNamed(context, '/login');
+  // }
 
   @override
   void initState() {
     super.initState();
-    loadData();
+    
   }
 
   @override
@@ -38,12 +38,14 @@ class _WelcomePageState extends State<WelcomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          myname ?? "รอสักครู่...",
+          "hello"
         ),
         actions: [
           IconButton(
             icon: Icon(Icons.logout),
-            onPressed: remove,
+            onPressed:(){
+
+            } ,
           ),
         ],
       ),
@@ -52,6 +54,15 @@ class _WelcomePageState extends State<WelcomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+
+             const Text("Access Token",
+              style: TextStyle(
+                fontSize: 28.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+
+            const SizedBox(height: 15.0),
             const Text(
               'ProDuct',
               style: TextStyle(

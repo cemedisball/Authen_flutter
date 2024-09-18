@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_lab1/controller/auth_service.dart';
 import 'package:flutter_lab1/models/user_model.dart';
+import 'package:flutter_lab1/providers/user_providers.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginForm extends StatefulWidget {
@@ -23,15 +25,20 @@ class _LoginFormState extends State<LoginForm> {
       final password = _passwordController.text;
 
       try {
-        final UserModel? userModel =
-            await AuthService().login(userName, password);
-        final SharedPreferences prefs = await SharedPreferences.getInstance();
-        await prefs.setString('Token', userModel!.token.accessToken);
-        await prefs.setString('R_Token', userModel!.token.refreshToken);
-        await prefs.setString('myname', userModel!.user.userName);
+        final UserModel? userModel = await AuthService().login(userName, password);
+            print(userName);
+            if (!mounted) return;
+            
+            
+        // final SharedPreferences prefs = await SharedPreferences.getInstance();
+        // await prefs.setString('Token', userModel!.token.accessToken);
+        // await prefs.setString('R_Token', userModel!.token.refreshToken);
+        // await prefs.setString('myname', userModel!.user.userName);
 
         if (userModel != null) {
           final String role = userModel.user.role;
+          Provider.of<UserProvider>(context, listen: false).onLogin(userModel);
+          
 
           if (role == 'admin') {
             Navigator.pushReplacementNamed(context, '/homeadmin');
