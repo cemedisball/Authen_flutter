@@ -9,7 +9,7 @@ import 'package:flutter_lab1/widgets/editpage.dart';
 import 'package:flutter_lab1/providers/user_providers.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -46,11 +46,11 @@ class MyApp extends StatelessWidget {
         ),
         home: const LoginPage(),
         routes: {
-          '/homeadmin': (context) => WelcomePage(),
-          '/homeuser': (context) => UserWelcomePage(),
-          '/addproduct': (context) => AddPage(),
-          '/editproduct': (context) => EditPage(),
-          '/login': (context) => LoginPage(),
+          '/homeadmin': (context) => const WelcomePage(),
+          '/homeuser': (context) => const UserWelcomePage(),
+          '/addproduct': (context) => const AddPage(),
+          '/editproduct': (context) => const EditPage(),
+          '/login': (context) => const LoginPage(),
         },
       ),
     );

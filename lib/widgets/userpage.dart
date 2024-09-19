@@ -38,7 +38,7 @@ class _UserWelcomePage extends State<UserWelcomePage> {
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.logout),
+            icon: const Icon(Icons.logout),
             onPressed: remove,
           ),
         ],
@@ -61,9 +61,9 @@ class _UserWelcomePage extends State<UserWelcomePage> {
                 scrollDirection: Axis.horizontal,
                 child: DataTable(
                   columnSpacing: 35.0, // ระยะห่างระหว่างคอลัมน์
-                  headingRowColor: MaterialStateProperty.all(
+                  headingRowColor: WidgetStateProperty.all(
                       Colors.grey[200]), // สีพื้นหลังของหัวข้อคอลัมน์
-                  dataRowColor: MaterialStateProperty.all(
+                  dataRowColor: WidgetStateProperty.all(
                       Colors.white), // สีพื้นหลังของเซลล์ข้อมูล
                   headingTextStyle: const TextStyle(
                     fontWeight: FontWeight.bold,

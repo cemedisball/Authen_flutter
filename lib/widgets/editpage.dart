@@ -34,14 +34,14 @@ class _Editpage extends State<EditPage> {
         padding: const EdgeInsets.all(15.0),
         child: Column(
           children: [
-            Text(
+            const Text(
               "Edit Product",
               style: TextStyle(
                 fontSize: 28.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            TextField(
+            const TextField(
               decoration: InputDecoration(
                 labelText: 'ชื่อ',
                 filled: true,
@@ -56,8 +56,8 @@ class _Editpage extends State<EditPage> {
                 ),
               ),
             ),
-            SizedBox(height: 16),
-            TextField(
+            const SizedBox(height: 16),
+            const TextField(
               decoration: InputDecoration(
                 labelText: 'ประเภท',
                 filled: true,
@@ -72,8 +72,8 @@ class _Editpage extends State<EditPage> {
                 ),
               ),
             ),
-            SizedBox(height: 16),
-            TextField(
+            const SizedBox(height: 16),
+            const TextField(
               decoration: InputDecoration(
                 labelText: 'ราคา',
                 filled: true,
@@ -88,8 +88,8 @@ class _Editpage extends State<EditPage> {
                 ),
               ),
             ),
-            SizedBox(height: 16),
-            TextField(
+            const SizedBox(height: 16),
+            const TextField(
               decoration: InputDecoration(
                 labelText: 'จำนวน',
                 filled: true,
@@ -104,7 +104,7 @@ class _Editpage extends State<EditPage> {
                 ),
               ),
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             ElevatedButton(
               onPressed: () {
                 // ปุ่มบันทึกยังไม่ได้เชื่อมโยงกับการทำงานจริง
@@ -114,7 +114,8 @@ class _Editpage extends State<EditPage> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12.0),
                 ),
-                padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 20.0, vertical: 10.0),
                 textStyle: const TextStyle(
                   fontSize: 18.0, // ขนาดของข้อความในปุ่ม
                 ),
