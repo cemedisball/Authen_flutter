@@ -34,7 +34,7 @@ class _UserWelcomePage extends State<UserWelcomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          myname ?? "รอสักครู่...",
+          "User",
         ),
         actions: [
           IconButton(

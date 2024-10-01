@@ -6,7 +6,7 @@ class Productpage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final auth = Provider()
+    //final auth = Provider()
     return const Placeholder();
   }
 }

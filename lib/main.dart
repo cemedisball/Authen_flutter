@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_lab1/widgets/login_form.dart';
-import 'package:flutter_lab1/widgets/userpage.dart';
+import 'package:flutter_lab1/pages/userpage.dart';
 import 'package:provider/provider.dart';
 import 'pages/login_page.dart';
-import 'package:flutter_lab1/widgets/adminpage.dart';
-import 'package:flutter_lab1/widgets/addpage.dart';
-import 'package:flutter_lab1/widgets/editpage.dart';
+import 'package:flutter_lab1/pages/adminpage.dart';
+import 'package:flutter_lab1/pages/addpage.dart';
+import 'package:flutter_lab1/pages/editpage.dart';
 import 'package:flutter_lab1/providers/user_providers.dart';
 
 

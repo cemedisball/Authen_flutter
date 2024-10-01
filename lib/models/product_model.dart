@@ -14,7 +14,7 @@ class ProductModel {
     String productType;
     int price;
     String unit;
-    int v;
+    //int v;
 
     ProductModel({
         required this.id,
@@ -22,7 +22,7 @@ class ProductModel {
         required this.productType,
         required this.price,
         required this.unit,
-        required this.v,
+        //required this.v,
     });
 
     factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
@@ -31,7 +31,7 @@ class ProductModel {
         productType: json["product_type"],
         price: json["price"],
         unit: json["unit"],
-        v: json["__v"],
+        //v: json["__v"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -40,6 +40,6 @@ class ProductModel {
         "product_type": productType,
         "price": price,
         "unit": unit,
-        "__v": v,
+        //"__v": v,
     };
 }
