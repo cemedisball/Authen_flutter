@@ -14,26 +14,16 @@ class LoginForm extends StatefulWidget {
 class _LoginFormState extends State<LoginForm> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
-  @override
   final _formKey = GlobalKey<FormState>();
 
   void _login() async {
     if (_formKey.currentState!.validate()) {
-      // Simulate a login check
       final userName = _usernameController.text;
       final password = _passwordController.text;
 
       try {
         final UserModel? userModel =
             await AuthService().login(userName, password);
-        print(userName);
-        if (!mounted) return;
-
-        // final SharedPreferences prefs = await SharedPreferences.getInstance();
-        // await prefs.setString('Token', userModel!.token.accessToken);
-        // await prefs.setString('R_Token', userModel!.token.refreshToken);
-        // await prefs.setString('myname', userModel!.user.userName);
 
         if (userModel != null) {
           final String role = userModel.user.role;
@@ -54,7 +44,6 @@ class _LoginFormState extends State<LoginForm> {
           );
         }
       } catch (e) {
-        print(e);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Failed to Login: $e')),
         );

@@ -43,10 +43,29 @@ class AuthService {
     }
   }
 
-  Future<void> logout() async {
+  Future<void> logout(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.remove('accessToken');
-    await prefs.remove('refreshToken');
+
+    // ลบ accessToken และ refreshToken จาก SharedPreferences
+    await prefs.remove('accessToken'); // ปรับให้ตรงกับ key ที่ใช้เก็บ token
+    await prefs.remove('refreshToken'); // หากมีการจัดเก็บ refresh token
+
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+
+    await prefs.clear();
+    final response = await http.post(
+      Uri.parse("$apiURL/api/auth/logout"),
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer ${userProvider.accessToken}",
+      },
+    );
+
+    if (response.statusCode == 200) {
+      // Logout successful
+    } else {
+      // Handle error
+    }
   }
 
   Future<void> refreshToken(BuildContext context) async {

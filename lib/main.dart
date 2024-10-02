@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_lab1/widgets/login_form.dart';
-import 'package:flutter_lab1/widgets/userpage.dart';
+import 'package:flutter_lab1/pages/userpage.dart';
 import 'package:provider/provider.dart';
 import 'pages/login_page.dart';
-import 'package:flutter_lab1/widgets/adminpage.dart';
-import 'package:flutter_lab1/widgets/addpage.dart';
-import 'package:flutter_lab1/widgets/editpage.dart';
+import 'package:flutter_lab1/pages/adminpage.dart';
+import 'package:flutter_lab1/pages/addpage.dart';
+import 'package:flutter_lab1/pages/editpage.dart';
 import 'package:flutter_lab1/providers/user_providers.dart';
 
 void main() {
@@ -46,11 +46,11 @@ class MyApp extends StatelessWidget {
         ),
         home: const LoginPage(),
         routes: {
-          '/homeadmin': (context) => const WelcomePage(),
-          '/homeuser': (context) => const UserWelcomePage(),
-          '/addproduct': (context) => const AddPage(),
-          '/editproduct': (context) => const EditPage(),
-          '/login': (context) => const LoginPage(),
+          '/homeadmin': (context) => WelcomePage(),
+          '/homeuser': (context) => UserWelcomePage(),
+          '/addproduct': (context) => AddPage(),
+          //'/editproduct': (context) => EditPage(),
+          '/login': (context) => LoginPage(),
         },
       ),
     );

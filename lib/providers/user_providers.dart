@@ -17,7 +17,7 @@ class UserProvider extends ChangeNotifier {
   }
 
   void onLogout() {
-    user;
+    _user = null;
     accesToken = null;
     refreshToken = null;
     notifyListeners();
