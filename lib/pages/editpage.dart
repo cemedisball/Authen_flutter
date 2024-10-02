@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_lab1/controller/product_service.dart';
 import 'package:flutter_lab1/models/product_model.dart';
+import 'package:flutter_lab1/controller/product_service.dart';
 
 class EditPage extends StatefulWidget {
   const EditPage({Key? key, required this.product}) : super(key: key);
@@ -13,7 +14,6 @@ class EditPage extends StatefulWidget {
 class _EditPageState extends State<EditPage> {
   final _formKey = GlobalKey<FormState>();
 
-  late String id; // เพิ่มตัวแปร id
   late String productName;
   late String productType;
   late int price;
@@ -23,7 +23,6 @@ class _EditPageState extends State<EditPage> {
   void initState() {
     super.initState();
     // ตั้งค่าข้อมูลผลิตภัณฑ์ที่จะแก้ไข
-    id = widget.product.id; // กำหนดค่า id
     productName = widget.product.productName;
     productType = widget.product.productType;
     price = widget.product.price;
@@ -33,7 +32,7 @@ class _EditPageState extends State<EditPage> {
   Future<void> _updateProduct() async {
     if (_formKey.currentState?.validate() ?? false) {
       final updatedProduct = ProductModel(
-        id: id, // ใช้ id ที่กำหนดไว้
+        id: widget.product.id,
         productName: productName,
         productType: productType,
         price: price,
@@ -88,12 +87,7 @@ class _EditPageState extends State<EditPage> {
                 initialValue: price.toString(),
                 decoration: InputDecoration(labelText: "Price"),
                 keyboardType: TextInputType.number,
-                onChanged: (value) {
-                  final parsedPrice = int.tryParse(value);
-                  if (parsedPrice != null) {
-                    price = parsedPrice; // อัปเดตราคา
-                  }
-                },
+                onChanged: (value) => price = int.tryParse(value) ?? 0,
                 validator: (value) =>
                     value!.isEmpty ? 'Please enter price' : null,
               ),
